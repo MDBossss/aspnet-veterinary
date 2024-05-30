@@ -22,5 +22,5 @@ public class Prescription
 
     public virtual Pet? Pet { get; set; }
 
-    public ICollection<Medication> Medacations { get; set; }
+    public ICollection<Medication> Medications { get; set; }
 }

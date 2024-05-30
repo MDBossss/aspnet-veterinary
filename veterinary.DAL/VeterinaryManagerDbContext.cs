@@ -23,7 +23,7 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
 
 
         builder.Entity<Prescription>()
-            .HasMany(d => d.Medacations)
+            .HasMany(d => d.Medications)
             .WithMany(f => f.Prescriptions);
 
 
@@ -60,7 +60,7 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
 
         // Default pet entries
 
-        builder.Entity<Pet>().HasData(new Dog
+        builder.Entity<Dog>().HasData(new Dog
         {
             ID = 1,
             Name = "Buddy",
@@ -70,7 +70,7 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
             OwnerID = 1
         });
 
-        builder.Entity<Pet>().HasData(new Bird
+        builder.Entity<Bird>().HasData(new Bird
         {
             ID = 2,
             Name = "Koko",
