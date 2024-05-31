@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Veterinary.DAL;
 
@@ -11,9 +12,11 @@ using Veterinary.DAL;
 namespace Veterinary.DAL.Migrations
 {
     [DbContext(typeof(VeterinaryManagerDbContext))]
-    partial class VeterinaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240531104412_diagnosis")]
+    partial class diagnosis
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -390,6 +393,24 @@ namespace Veterinary.DAL.Migrations
                     b.HasIndex("PetID");
 
                     b.ToTable("Prescriptions");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Date = new DateTime(2024, 5, 31, 12, 44, 12, 197, DateTimeKind.Local).AddTicks(8235),
+                            Diagnosis = "Ear Infection",
+                            Dosage = "Once a day",
+                            PetID = 1
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Date = new DateTime(2024, 5, 31, 12, 44, 12, 197, DateTimeKind.Local).AddTicks(8239),
+                            Diagnosis = "Arthritis",
+                            Dosage = "Every two days",
+                            PetID = 2
+                        });
                 });
 
             modelBuilder.Entity("Veterinary.Model.Bird", b =>
@@ -405,7 +426,7 @@ namespace Veterinary.DAL.Migrations
                         new
                         {
                             ID = 2,
-                            BirthDate = new DateTime(2024, 5, 31, 13, 3, 5, 227, DateTimeKind.Local).AddTicks(4564),
+                            BirthDate = new DateTime(2024, 5, 31, 12, 44, 12, 197, DateTimeKind.Local).AddTicks(8064),
                             Name = "Koko",
                             OwnerID = 2,
                             Weight = 3.7000000000000002,

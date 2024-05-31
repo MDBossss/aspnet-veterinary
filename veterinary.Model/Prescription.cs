@@ -13,10 +13,11 @@ public class Prescription
     public string Dosage { get; set; }
 
     [Required]
+    public string Diagnosis { get; set; }
+
+    [Required]
     public DateTime Date { get; set; }
     
-    public string Description { get; set; }
-
     [ForeignKey("Pet")]
     public int PetID { get; set; }
 

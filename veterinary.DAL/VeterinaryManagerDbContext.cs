@@ -95,9 +95,5 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
             ID = 2,
             Name = "Prednisolone"
         });
-
-
-
- 
     }
 }

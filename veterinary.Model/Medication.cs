@@ -10,5 +10,5 @@ public class Medication
 
     public string Name { get; set; }
 
-    public ICollection<Prescription> Prescriptions { get; set; }
+    public ICollection<Prescription>? Prescriptions { get; set; }
 }

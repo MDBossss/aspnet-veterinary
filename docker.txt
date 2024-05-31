@@ -6,7 +6,7 @@ docker start mvc
 
 
 ## migrate (dont forget to change name)
-dotnet ef migrations add m2 --startup-project ../Veterinary.Web --context VeterinaryManagerDbContext
+dotnet ef migrations add diagnosis --startup-project ../Veterinary.Web --context VeterinaryManagerDbContext
 
 ## update the database
 dotnet ef database update --startup-project ../Veterinary.Web --context VeterinaryManagerDbContext
