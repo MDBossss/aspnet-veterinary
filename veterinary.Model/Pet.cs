@@ -20,15 +20,49 @@ public abstract class Pet
     [Required]
     public double Weight { get; set; }
 
-    [ForeignKey("Owner")]
+    [ForeignKey(nameof(Owner))]
     public int OwnerID { get; set; }
 
     public virtual Owner Owner { get; set; }
 
+    public ICollection<Prescription>? Prescriptions { get; set; }
+
     [Required]
     public abstract string Species { get; }
 
+
+    public string Age
+    {
+        get
+        {
+            var today = DateTime.Now;
+            var age = today.Year - BirthDate.Year;
+
+            // Check if birthday has passed in the current year
+            if (today.Month < BirthDate.Month || (today.Month == BirthDate.Month && today.Day < BirthDate.Day))
+            {
+                age--; // Decrement age if birthday hasn't passed yet
+            }
+
+            if (age == 0)
+            {
+                var months = today.Month - BirthDate.Month;
+                if (months < 0)
+                {
+                    months += 12; // Adjust for months that haven't passed in the current year
+                }
+                return $"{months} month{(months > 1 ? "s" : "")}";
+            }
+            else
+            {
+                return $"{age} year{(age > 1 ? "s" : "")}";
+            }
+        }
+    }
+
 }
+
+
 
 public class Dog: Pet
 {

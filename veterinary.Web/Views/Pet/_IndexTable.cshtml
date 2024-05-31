@@ -1,0 +1,46 @@
+﻿@using Veterinary.Model
+@model List<Pet>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Animal</th>
+            <th>Age</th>
+            <th>Weight</th>
+            <th>Owner</th>
+            <th>Prescriptions</th>
+            <th></th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach (var p in Model)
+        {
+            <tr>
+                <td>
+                    <a asp-controller="Pet" asp-action="Details" asp-route-id="@p.ID">
+                        @p.Name
+                    </a>
+                </td>
+
+                <td>@p.Species</td>
+                <td>@p.Age</td>
+                <td>@p.Weight</td>
+                <td>@p.Owner.FullName</td>
+                <td>@(p.Prescriptions?.Count ?? 0)</td>
+
+
+                <td>
+                    <a asp-controller="Pet" asp-action="Delete" asp-route-id="@p.ID">
+                        <button class="btn btn-danger">
+                            <img src="/images/trash.svg" class="fill-white"/>
+                        </button>
+                    </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+
+

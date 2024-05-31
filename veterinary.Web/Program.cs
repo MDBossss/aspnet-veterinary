@@ -68,6 +68,20 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 
+app.MapControllerRoute(
+    name: "location",
+    pattern: "location",
+    defaults: new { controller = "Home", action = "Location" }
+    );
+
+app.MapControllerRoute(
+    name: "privacy",
+    pattern: "privacy",
+    defaults: new { controller = "Home", action = "Privacy" }
+    );
+
+
+
 app.MapRazorPages();
 
 

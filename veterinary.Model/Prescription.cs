@@ -18,7 +18,7 @@ public class Prescription
     [Required]
     public DateTime Date { get; set; }
     
-    [ForeignKey("Pet")]
+    [ForeignKey(nameof(Pet))]
     public int PetID { get; set; }
 
     public virtual Pet? Pet { get; set; }

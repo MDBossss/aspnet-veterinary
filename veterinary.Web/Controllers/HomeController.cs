@@ -21,13 +21,19 @@ namespace veterinary.Controllers
             this._userManager = _userManager;
         }
 
-        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        [AllowAnonymous]
         public IActionResult Index()
         {
             return View();
         }
 
-        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        [AllowAnonymous]
+        public IActionResult Location()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
         public IActionResult Privacy()
         {
             return View();

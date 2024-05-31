@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Veterinary.DAL;
 
@@ -11,9 +12,11 @@ using Veterinary.DAL;
 namespace Veterinary.DAL.Migrations
 {
     [DbContext(typeof(VeterinaryManagerDbContext))]
-    partial class VeterinaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240531171103_presriptionsonpet")]
+    partial class presriptionsonpet
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

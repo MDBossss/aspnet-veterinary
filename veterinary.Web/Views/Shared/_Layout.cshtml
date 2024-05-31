@@ -30,15 +30,21 @@
                 <div class="d-sm-inline-flex justify-content-between">
 
                     <ul class="flex-grow-1 d-flex gap-5 justify-content-between align-items-center mb-0">
-                        @if (User.IsInRole(RoleConstants.Doctor) || User.IsInRole(RoleConstants.Apprentice))
-                        {
                         <li>
-                            <a class="text-white text-decoration-none" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            <a class="text-white text-decoration-none" asp-route="Location">Location</a>
+
                         </li>
 
                         <li>
-                            <a class="text-white text-decoration-none" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            <a class="text-white text-decoration-none" asp-route="privacy">Privacy</a>
                         </li>
+
+                        @if (User.IsInRole(RoleConstants.Doctor) || User.IsInRole(RoleConstants.Apprentice))
+                        {
+                            <li>
+                                <a class="text-white text-decoration-none" asp-area="" asp-controller="Pet" asp-action="Index">Pets</a>
+                            </li>
+
                         }
                     </ul>
 
@@ -59,7 +65,7 @@
 
     <footer class="border-top footer text-muted">
         <div class="container">
-            &copy; 2024 - veterinary - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+            &copy; 2024 - veterinary - <a class="text-white text-decoration-none" asp-route="privacy">Privacy</a>
         </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
