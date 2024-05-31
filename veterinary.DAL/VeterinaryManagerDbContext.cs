@@ -3,7 +3,6 @@
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using System.Reflection.Emit;
 using Veterinary.Model;
 
 namespace Veterinary.DAL;
@@ -30,10 +29,10 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
         // Seed roles
 
         builder.Entity<IdentityRole>()
-            .HasData(new IdentityRole { Id = "1", Name = "Doctor", NormalizedName = "DOCTOR" });
+            .HasData(new IdentityRole { Id = "1", Name = RoleConstants.Doctor, NormalizedName = RoleConstants.Doctor.ToUpper() });
 
         builder.Entity<IdentityRole>().HasData(new IdentityRole
-        { Id = "2", Name = "Apprentice", NormalizedName = "APPRENTICE" });
+        { Id = "2", Name = RoleConstants.Apprentice, NormalizedName = RoleConstants.Apprentice.ToUpper() });
 
 
 

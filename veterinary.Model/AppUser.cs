@@ -6,4 +6,11 @@ namespace Veterinary.Model
     {
 
     }
+
+    public static class RoleConstants
+    {
+        public const string Doctor = "Doctor";
+        public const string Apprentice = "Apprentice";
+        public const string DoctorOrApprentice = "Doctor, Apprentice";
+    }
 }

@@ -1,23 +1,33 @@
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using veterinary.Models;
+using Veterinary.DAL;
+using Veterinary.Model;
+using Veterinary.Web.Controllers;
 
 namespace veterinary.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        private readonly ILogger<HomeController> _logger;
 
-        public HomeController(ILogger<HomeController> logger)
+        private VeterinaryManagerDbContext veterinaryManagerDbContext;
+        private UserManager<AppUser> _userManager;
+
+        public HomeController(VeterinaryManagerDbContext veterinaryManagerDbContext, UserManager<AppUser> _userManager) : base(_userManager)
         {
-            _logger = logger;
+            this.veterinaryManagerDbContext = veterinaryManagerDbContext;
+            this._userManager = _userManager;
         }
 
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
         public IActionResult Index()
         {
             return View();
         }
 
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
         public IActionResult Privacy()
         {
             return View();
