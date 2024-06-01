@@ -1,6 +1,34 @@
 ﻿@using Veterinary.Model
+@using Veterinary.Web.Models
 @model List<Pet>
 
-<div class="row card p-5" id="tableContainer">
-    <partial name="_IndexTable" model=@Model />
+<div>
+    <partial name="_PetFilter" model="new PetFilterModel()"/>
 </div>
+
+<div class="row card p-5" id="tableContainer">
+    <partial name="_IndexTable" model="new List<Pet>()" />
+</div>
+
+@section scripts {
+
+    <script>
+        // Ajax call to refresh the table
+
+        $(document).ready(filterPets());
+
+        function filterPets() {
+            var formData = $("#petForm").serialize();
+            
+            $.ajax({
+                url: "@Url.Action("IndexAjax", new PetFilterModel())",
+                method: "POST",
+                data: formData,
+                success: function (html) {
+                    $("#tableContainer").html(html)
+                }
+            })
+        }
+
+    </script>
+}

@@ -1,0 +1,19 @@
+﻿@using Veterinary.Web.Models
+@model PetFilterModel
+
+<div>
+
+    <h5>Filter</h5>
+
+    <form class="mb-2 d-flex gap-1" method="post" asp-controller="Pet" asp-action="Filter" id="petForm">
+        <div class="d-flex gap-1 flex-grow-1">
+            @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter pet name" })
+
+            @Html.TextBoxFor(m => m.OwnerName, new { @class = "form-control", placeholder = "Enter owner name" })
+
+            @Html.TextBoxFor(m => m.Species, new { @class = "form-control", placeholder = "Enter species" })
+        </div>
+        <button type="button" onclick="filterPets()" class="btn btn-primary">Filter</button>
+    </form>
+
+</div>
