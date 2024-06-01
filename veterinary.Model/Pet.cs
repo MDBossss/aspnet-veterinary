@@ -15,15 +15,16 @@ public abstract class Pet
     public string Name { get; set; }
 
     [Required]
-    public DateTime BirthDate { get; set; }
+    public DateTime? BirthDate { get; set; }
 
     [Required]
     public double Weight { get; set; }
 
     [ForeignKey(nameof(Owner))]
+    [Required(AllowEmptyStrings = false, ErrorMessage = "The Owner field is required")]
     public int OwnerID { get; set; }
 
-    public virtual Owner Owner { get; set; }
+    public virtual Owner? Owner { get; set; }
 
     public ICollection<Prescription>? Prescriptions { get; set; }
 
@@ -36,17 +37,17 @@ public abstract class Pet
         get
         {
             var today = DateTime.Now;
-            var age = today.Year - BirthDate.Year;
+            var age = today.Year - BirthDate?.Year;
 
             // Check if birthday has passed in the current year
-            if (today.Month < BirthDate.Month || (today.Month == BirthDate.Month && today.Day < BirthDate.Day))
+            if (today.Month < BirthDate?.Month || (today.Month == BirthDate?.Month && today.Day < BirthDate?.Day))
             {
                 age--; // Decrement age if birthday hasn't passed yet
             }
 
             if (age == 0)
             {
-                var months = today.Month - BirthDate.Month;
+                var months = today.Month - BirthDate?.Month;
                 if (months < 0)
                 {
                     months += 12; // Adjust for months that haven't passed in the current year

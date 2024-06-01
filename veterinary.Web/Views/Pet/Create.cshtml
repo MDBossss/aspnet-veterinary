@@ -1,0 +1,27 @@
+﻿@using Veterinary.Model
+@model Pet
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+@if(Model.Species == "Dog")
+{
+    <form method="post" asp-controller="Pet" asp-action="CreateDog">
+        <partial name="_CreateOrEdit" model="@Model" />
+    </form>
+}
+else if(Model.Species == "Bird")
+{
+    <form method="post" asp-controller="Pet" asp-action="CreateBird">
+        <partial name="_CreateOrEdit" model="@Model" />
+    </form>
+}
+else if (Model.Species == "Hamster")
+{
+    <form method="post" asp-controller="Pet" asp-action="CreateHamster">
+        <partial name="_CreateOrEdit" model="@Model" />
+    </form>
+}

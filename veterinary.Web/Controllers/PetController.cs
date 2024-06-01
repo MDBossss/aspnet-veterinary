@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Identity.Client;
 using Veterinary.DAL;
@@ -79,6 +80,109 @@ namespace Veterinary.Web.Controllers
             ViewBag.prescriptions = prescriptions.ToList();
 
             return View(pet);
+        }
+
+        [Authorize(Roles = RoleConstants.Doctor)]
+        public IActionResult Create(string species)
+        {
+            ViewBag.Owners = veterinaryManagerDbContext.Owners.ToList();
+
+            Pet pet;
+            if(species == "Dog")
+            {
+                pet = new Dog();
+            }
+            else if(species == "Bird")
+            {
+                pet = new Bird();
+            }
+            else
+            {
+                pet = new Hamster();
+            }
+
+            return View(pet);
+        }
+
+        [Authorize(Roles = RoleConstants.Doctor)]
+        [HttpPost]
+        public IActionResult CreateDog(Dog dog)
+        {
+            ViewBag.Owners = veterinaryManagerDbContext.Owners.ToList();
+            if (ModelState.IsValid)
+            {
+                veterinaryManagerDbContext.Pets.Add(dog);
+                veterinaryManagerDbContext.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View(dog);
+        }
+
+        [Authorize(Roles = RoleConstants.Doctor)]
+        [HttpPost]
+        public IActionResult CreateBird(Bird bird)
+        {
+            ViewBag.Owners = veterinaryManagerDbContext.Owners.ToList();
+            if (ModelState.IsValid)
+            {
+                veterinaryManagerDbContext.Pets.Add(bird);
+                veterinaryManagerDbContext.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View(bird);
+        }
+
+        [Authorize(Roles = RoleConstants.Doctor)]
+        [HttpPost]
+        public IActionResult CreateHamster(Hamster hamster)
+        {
+            ViewBag.Owners = veterinaryManagerDbContext.Owners.ToList();
+            if (ModelState.IsValid)
+            {
+                veterinaryManagerDbContext.Pets.Add(hamster);
+                veterinaryManagerDbContext.SaveChanges();
+                return RedirectToAction("Index");
+
+            }
+            return View(hamster);
+        }
+
+
+        [Authorize(Roles = RoleConstants.Doctor)]
+        [ActionName("Edit")]
+        public IActionResult EditGet(int id)
+        {
+            ViewBag.Owners = veterinaryManagerDbContext.Owners.ToList();
+
+            var pet = veterinaryManagerDbContext.Pets.First(p => p.ID == id);
+
+            return View(pet);
+        }
+
+
+        [Authorize(Roles = RoleConstants.Doctor)]
+        [HttpPost]
+        [ActionName("Edit")]
+        public async Task<IActionResult> EditPost(int id)
+        {
+            var pet = veterinaryManagerDbContext.Pets.Include(p => p.Owner).First(p => p.ID == id);
+
+            bool isOk = await TryUpdateModelAsync(pet);
+
+            var validationErrors = ModelState.Values
+                .Where(e => e.Errors.Count > 0)
+                .SelectMany(e => e.Errors)
+                .Select(e => e.ErrorMessage)
+                .ToList();
+
+            if(isOk)
+            {
+                veterinaryManagerDbContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+            return View();
         }
 
         public List<Pet> FilterPets(List<Pet> pets, PetFilterModel filterModel)

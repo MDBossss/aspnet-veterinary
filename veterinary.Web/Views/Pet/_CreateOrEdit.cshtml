@@ -1,0 +1,75 @@
+﻿@using Veterinary.Model
+@model Pet
+
+<div class="form-group">
+    <label for="Species" class="col-form-label">Species:</label>
+
+    <span>@Model.Species</span>  @Html.HiddenFor(m => m.Species)
+</div>
+
+<div id="dynamic-inputs">
+    @* Common fields for all pets *@
+    <div class="form-group">
+        <label for="Name" class="col-form-label">Name:</label>
+
+        @Html.TextBoxFor(m => m.Name, new { @class = "form-control", placeholder = "Enter pet name", required = true })
+
+        <span class="text-danger" asp-validation-for="Name"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="BirthDate" class="col-form-label">Birth Date:</label>
+
+        <div 
+            class="input-group date" 
+            data-provide="datepicker" 
+            data-date-format="@System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToLower()"
+        >
+            <input asp-for="BirthDate" type="text" class="form-control datepicker" id="date">
+
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+        <span class="text-danger" asp-validation-for="BirthDate"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Weight" class="col-form-label">Weight (kg):</label>
+        @Html.TextBoxFor(m => m.Weight, new { @class = "form-control", type = "number", step = "0.1", required = true })
+        <span class="text-danger" asp-validation-for="Weight"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="OwnerID" class="col-form-label">Owner:</label>
+        @Html.DropDownListFor(m => m.OwnerID, new SelectList(ViewBag.Owners, "ID", "FullName"),"", new { @class = "form-control", required = true })
+        <span class="text-danger" asp-validation-for="OwnerID"></span>
+    </div>
+
+    @* Dynamic fields based on species *@
+    <div>
+        @if (Model.Species == "Dog")
+        {
+            <div class="form-group">
+                <label for="Breed" class="col-form-label">Breed:</label>
+                @Html.TextBoxFor(m => ((Dog)Model).Breed, new { @class = "form-control", placeholder = "Enter breed" })
+            </div>
+        }
+        else if (Model.Species == "Bird")
+        {
+            <div class="form-group">
+                <label for="Wingspan" class="col-form-label">Wingspan (cm):</label>
+                @Html.TextBoxFor(m => ((Bird)Model).Wingspan, new { @class = "form-control", type = "number", step = "0.1" })
+            </div>
+        }
+        else if (Model.Species == "Hamster")
+        {
+            <div class="form-group">
+                <label for="TimesSteppedOn" class="col-form-control">Times Stepped On:</label>
+                @Html.TextBoxFor(m => ((Hamster)Model).TimesSteppedOn, new { @class = "form-control", type = "number" })
+            </div>
+        }
+    </div>
+</div>
+
+<button type="submit" class="btn btn-primary mt-5">Save</button>

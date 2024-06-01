@@ -79,6 +79,16 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
             OwnerID = 2
         });
 
+        builder.Entity<Hamster>().HasData(new Hamster
+        {
+            ID = 3,
+            Name = "Donald",
+            BirthDate = DateTime.Now,
+            Weight = 0.4,
+            OwnerID = 2,
+            TimesSteppedOn = 433
+        });
+
 
 
         // Default medication entries
