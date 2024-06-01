@@ -36,23 +36,29 @@ public abstract class Pet
     {
         get
         {
+            if(BirthDate == null)
+            {
+                return "1 month";
+            }
+
             var today = DateTime.Now;
-            var age = today.Year - BirthDate?.Year;
+            var birthDate = BirthDate ?? DateTime.MinValue;
+            var age = today.Year - birthDate.Year;
 
             // Check if birthday has passed in the current year
-            if (today.Month < BirthDate?.Month || (today.Month == BirthDate?.Month && today.Day < BirthDate?.Day))
+            if (today.Month < birthDate.Month || (today.Month == birthDate.Month && today.Day < birthDate.Day))
             {
                 age--; // Decrement age if birthday hasn't passed yet
             }
 
-            if (age == 0)
+            if (age < 1)
             {
-                var months = today.Month - BirthDate?.Month;
+                var months = today.Month - birthDate.Month;
                 if (months < 0)
                 {
                     months += 12; // Adjust for months that haven't passed in the current year
                 }
-                return $"{months} month{(months > 1 ? "s" : "")}";
+                return $"{months+1} month{(months+1 > 1 ? "s" : "")}";
             }
             else
             {

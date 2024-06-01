@@ -81,7 +81,7 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
 
         builder.Entity<Hamster>().HasData(new Hamster
         {
-            ID = 3,
+            ID = 6,
             Name = "Donald",
             BirthDate = DateTime.Now,
             Weight = 0.4,

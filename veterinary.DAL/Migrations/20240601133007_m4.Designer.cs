@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Veterinary.DAL;
 
@@ -11,9 +12,11 @@ using Veterinary.DAL;
 namespace Veterinary.DAL.Migrations
 {
     [DbContext(typeof(VeterinaryManagerDbContext))]
-    partial class VeterinaryManagerDbContextModelSnapshot : ModelSnapshot
+    [Migration("20240601133007_m4")]
+    partial class m4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -406,7 +409,7 @@ namespace Veterinary.DAL.Migrations
                         new
                         {
                             ID = 2,
-                            BirthDate = new DateTime(2024, 6, 1, 15, 31, 2, 373, DateTimeKind.Local).AddTicks(3650),
+                            BirthDate = new DateTime(2024, 6, 1, 15, 30, 7, 47, DateTimeKind.Local).AddTicks(8950),
                             Name = "Koko",
                             OwnerID = 2,
                             Weight = 3.7000000000000002,
@@ -448,8 +451,8 @@ namespace Veterinary.DAL.Migrations
                     b.HasData(
                         new
                         {
-                            ID = 6,
-                            BirthDate = new DateTime(2024, 6, 1, 15, 31, 2, 374, DateTimeKind.Local).AddTicks(9716),
+                            ID = 3,
+                            BirthDate = new DateTime(2024, 6, 1, 15, 30, 7, 49, DateTimeKind.Local).AddTicks(1977),
                             Name = "Donald",
                             OwnerID = 2,
                             Weight = 0.40000000000000002,
