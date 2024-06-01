@@ -1,0 +1,70 @@
+﻿@using Veterinary.Model
+@using Veterinary.Web
+
+@{
+    ViewData["Title"] = "Pet details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+
+<div class="d-flex justify-content-between align-items-center">
+    <h1 class="display-4">@Model.Name</h1>
+
+    <a asp-controller="Pet" asp-action="Edit" asp-route-id="@Model.ID"><button class="btn btn-primary btn-lg px-5">Edit</button></a>
+</div>
+<hr />
+
+<div class="row">
+    <div class="col-md-6">
+        <dl class="row">
+            <dt class="col-sm-3">Species:</dt>
+            <dd class="col-sm-9">@Model.Species</dd>
+            <dt class="col-sm-3">Age:</dt>
+            <dd class="col-sm-9">@Model.Age</dd>
+            <dt class="col-sm-3">Birth Date:</dt>
+            <dd class="col-sm-9">@Model.BirthDate.ToString("dd/MM/yyyy")</dd>
+            <dt class="col-sm-3">Weight:</dt>
+            <dd class="col-sm-9">@Model.Weight kg</dd>
+            <dt class="col-sm-3">Owner:</dt>
+            <dd class="col-sm-9">
+                @if (@Model.Owner != null)
+                {
+                    <a asp-page="/Owners/Details" asp-route-id="@Model.OwnerID">@Model.Owner.FullName</a>
+                }
+                else
+                {
+                    <span>No owner assigned</span>
+                }
+            </dd>
+        </dl>
+    </div>
+    <div class="col-md-6">
+        @if (Model is Dog)
+        {
+            <dl class="row">
+                <dt class="col-sm-3">Breed:</dt>
+                <dd class="col-sm-9"> @((Model as Dog).Breed)</dd>
+            </dl>
+        }
+        else if (Model is Bird)
+        {
+        <dl class="row">
+            <dt class="col-sm-3">Wingspan:</dt>
+            <dd class="col-sm-9"> @((Model as Bird).Wingspan) cm</dd>
+        </dl>
+        }
+        else if (Model is Hamster)
+        {
+        <dl class="row">
+            <dt class="col-sm-3">Times Stepped On:</dt>
+            <dd class="col-sm-9"> @((Model as Hamster).TimesSteppedOn)</dd>
+        </dl>
+        }
+    </div>
+</div>
+
+<div class="card p-5">
+    <partial name="../Prescription/_PrescriptionsTable" model="ViewBag.prescriptions" />
+</div>

@@ -1,0 +1,33 @@
+﻿@using Veterinary.Model
+@model List<Prescription>
+
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Diagnosis</th>
+            <th>Date Issued</th>
+            <th>Dosage</th>
+            <th>Pet Name</th>
+            <th>Medications</th>
+        </tr>
+    </thead>
+
+    <tbody>
+        @foreach(var pr in Model)
+        {
+            <tr>
+                <td>@pr.Diagnosis</td>
+                <td>@pr.Date</td>
+                <td>@pr.Pet?.Name</td>
+                <td>
+                    @foreach(var m in pr.Medications)
+                    {
+                        <p>@m.Name</p>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

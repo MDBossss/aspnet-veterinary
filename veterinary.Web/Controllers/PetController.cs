@@ -60,6 +60,27 @@ namespace Veterinary.Web.Controllers
             return View("Index", pets.ToList());
         }
 
+
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        public IActionResult Details(int? id)
+        {
+            var pet = id != null ? veterinaryManagerDbContext.Pets
+                .Include(p => p.Owner)
+                .Include(p => p.Prescriptions)
+                .Where(p => p.ID == id)
+                .FirstOrDefault() : null;
+
+            var prescriptions = veterinaryManagerDbContext.Prescriptions
+                .Include(pr => pr.Medications)
+                .Include(pr => pr.Pet)
+                .Where(pr => pr.PetID == id)
+                .ToList();
+
+            ViewBag.prescriptions = prescriptions.ToList();
+
+            return View(pet);
+        }
+
         public List<Pet> FilterPets(List<Pet> pets, PetFilterModel filterModel)
         {
             // Create a copy of the list to avoid modifying the original list

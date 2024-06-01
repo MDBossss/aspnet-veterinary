@@ -6,8 +6,12 @@
     <partial name="_PetFilter" model="new PetFilterModel()"/>
 </div>
 
-<div class="row card p-5" id="tableContainer">
-    <partial name="_IndexTable" model="new List<Pet>()" />
+<div class="row card p-5">
+    <a asp-controller="Pet" asp-action="Create" class="w-100"><button class="btn btn-primary w-100">Add new pet</button></a>
+
+    <div id="tableContainer">
+        <partial name="_IndexTable" model="new List<Pet>()" />
+    </div>
 </div>
 
 @section scripts {
