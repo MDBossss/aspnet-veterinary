@@ -1,0 +1,12 @@
+﻿@using Veterinary.Model
+@model Owner
+
+@{
+    ViewData["Title"] = "Edit";
+}
+<h1>@ViewData["Title"]</h1>
+
+<form asp-controller="Owner" asp-action="Edit">
+    @Html.HiddenFor(o => o.ID)
+    <partial name="_CreateOrEdit" model="@Model" />
+</form>

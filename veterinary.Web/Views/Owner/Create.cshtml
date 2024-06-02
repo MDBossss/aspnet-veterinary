@@ -1,0 +1,13 @@
+﻿@using Veterinary.Model
+@model Owner
+
+@{
+    ViewData["Title"] = "Create";
+}
+<h1>@ViewData["Title"]</h1>
+
+
+<form method="post" asp-controller="Owner" asp-action="Create">
+    <partial name="_CreateOrEdit" model="@(new Owner())" />
+    
+</form>

@@ -55,7 +55,7 @@ namespace Veterinary.Web.Controllers
             return View(prescription);
         }
 
-        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        [Authorize(Roles = RoleConstants.Doctor)]
         public IActionResult Delete(int id)
         {
             var existingPrescription = veterinaryManagerDbContext.Prescriptions.First(pr => pr.ID == id);

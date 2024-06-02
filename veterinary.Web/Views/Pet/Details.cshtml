@@ -40,7 +40,7 @@ else
             <dd class="col-sm-9">
                 @if (@Model.Owner != null)
                 {
-                    <a asp-page="/Owners/Details" asp-route-id="@Model.OwnerID">@Model.Owner.FullName</a>
+                    <a>@Model.Owner.FullName</a>
                 }
                 else
                 {
