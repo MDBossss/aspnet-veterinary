@@ -55,5 +55,22 @@ namespace Veterinary.Web.Controllers
             return View(prescription);
         }
 
+
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        public IActionResult Delete(int id)
+        {
+            var existingPrescription = veterinaryManagerDbContext.Prescriptions.First(pr => pr.ID == id);
+
+            if(existingPrescription == null)
+            {
+                return NotFound();
+            }
+
+            veterinaryManagerDbContext.Prescriptions.Remove(existingPrescription);
+            veterinaryManagerDbContext.SaveChanges();
+
+            return RedirectToAction("Details", "Pet", new { id = existingPrescription.PetID });
+        }
+
     }
 }

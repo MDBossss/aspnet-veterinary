@@ -10,6 +10,7 @@
             <th>Dosage</th>
             <th>Pet Name</th>
             <th>Medications</th>
+            <th></th>
         </tr>
     </thead>
 
@@ -21,11 +22,20 @@
                 <td>@pr.Date</td>
                 <td>@pr.Dosage</td>
                 <td>@pr.Pet?.Name</td>
+
                 <td>
                     @foreach(var m in pr.Medications)
                     {
                         <p>@m.Name</p>
                     }
+                </td>
+
+                <td>
+                    <a asp-controller="Prescription" asp-action="Delete" asp-route-id="@pr.ID">
+                        <button class="btn btn-danger">
+                            <img src="/images/trash.svg" class="fill-white" />
+                        </button>
+                    </a>
                 </td>
             </tr>
         }
