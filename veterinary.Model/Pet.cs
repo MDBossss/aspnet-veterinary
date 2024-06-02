@@ -18,6 +18,7 @@ public abstract class Pet
     public DateTime? BirthDate { get; set; }
 
     [Required]
+    [Range(0.1, 100)]
     public double Weight { get; set; }
 
     [ForeignKey(nameof(Owner))]
