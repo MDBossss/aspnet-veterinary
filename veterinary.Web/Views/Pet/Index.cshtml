@@ -38,5 +38,24 @@
             })
         }
 
+        function deletePet(petId) {
+            $.ajax({
+                url: '@Url.Action("DeleteAjax", "Pet")',
+                method: "POST", 
+                data: { id: petId }, 
+                success: function (data) {
+                    if (data.success === true) { 
+                        filterPets(); // Refetch and update the table with AJAX
+                    } else {
+                        alert("Error deleting pet. Please try again."); 
+                    }
+                },
+                error: function (jqXHR, textStatus, errorThrown) {
+                    console.error("Error deleting pet:", textStatus, errorThrown);
+                   
+                }
+            });
+        }
+
     </script>
 }

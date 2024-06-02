@@ -185,6 +185,23 @@ namespace Veterinary.Web.Controllers
             return View();
         }
 
+        [Authorize(Roles = RoleConstants.Doctor)]
+        public IActionResult DeleteAjax(int id)
+        {
+            var existingPet = veterinaryManagerDbContext.Pets.Find(id);
+
+            if (existingPet == null)
+            {
+                return NotFound();
+            }
+
+            veterinaryManagerDbContext.Pets.Remove(existingPet);
+            veterinaryManagerDbContext.SaveChanges();
+
+            // Return a JSON response indicating success for the AJAX call
+            return Json(new { success = true });
+        }
+
         public List<Pet> FilterPets(List<Pet> pets, PetFilterModel filterModel)
         {
             // Create a copy of the list to avoid modifying the original list

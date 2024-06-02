@@ -38,7 +38,7 @@ public abstract class Pet
         {
             if(BirthDate == null)
             {
-                return "1 month";
+                return "";
             }
 
             var today = DateTime.Now;
