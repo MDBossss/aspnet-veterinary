@@ -1,0 +1,58 @@
+﻿@using Veterinary.Model
+@model Prescription
+
+@{
+    ViewData["Title"] = "New prescription";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<form class="d-flex flex-column gap-2" method="post" asp-controller="Prescription" asp-action="Create">
+    <div class="form-group">
+        <input asp-for="PetID" type="hidden" value="@ViewBag.PetID" />
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Diagnosis">Diagnosis:</label>
+        <input asp-for="Diagnosis" class="form-control" />
+        <span asp-validation-for="Diagnosis" class="text-danger"></span>
+    </div>
+
+
+
+    <div class="form-group">
+        <label for="Date" class="col-form-label">Date</label>
+
+        <div class="input-group date"
+             data-provide="datepicker"
+             data-date-format="@System.Threading.Thread.CurrentThread.CurrentCulture.DateTimeFormat.ShortDatePattern.ToLower()">
+            <input asp-for="Date" type="text" value="@(DateTime.Now)" class="form-control datepicker" id="date">
+
+            <div class="input-group-addon">
+                <span class="glyphicon glyphicon-th"></span>
+            </div>
+        </div>
+        <span class="text-danger" asp-validation-for="Date"></span>
+    </div>
+
+    <div class="form-group">
+        <label for="Medications">Medications:</label>
+        <select asp-for="Medications" id="Medications" class="form-control" multiple>
+            @if (ViewBag.Medication != null)
+            {
+                foreach (var medication in ViewBag.Medication)
+                {
+                    <option value="@medication.ID">@medication.Name</option>
+                }
+            }
+        </select>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="Dosage">Dosage:</label>
+        <input asp-for="Dosage" class="form-control" />
+        <span asp-validation-for="Dosage" class="text-danger"></span>
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-2">Create Prescription</button>
+</form>

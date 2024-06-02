@@ -66,5 +66,9 @@
 </div>
 
 <div class="card p-5">
-    <partial name="../Prescription/_PrescriptionsTable" model="ViewBag.prescriptions" />
+    <div class="d-flex gap-1">
+        <a asp-controller="Prescription" asp-action="Create" asp-route-petid="@Model.ID" class="w-100"><button class="btn btn-primary w-100">New prescription</button></a>
+    </div>
+
+    <partial name="../Prescription/_PrescriptionsTable" model="ViewBag.Prescriptions" />
 </div>

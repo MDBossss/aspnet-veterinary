@@ -77,7 +77,7 @@ namespace Veterinary.Web.Controllers
                 .Where(pr => pr.PetID == id)
                 .ToList();
 
-            ViewBag.prescriptions = prescriptions.ToList();
+            ViewBag.Prescriptions = prescriptions.ToList();
 
             return View(pet);
         }
