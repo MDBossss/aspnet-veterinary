@@ -93,16 +93,23 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
 
         // Default medication entries
 
-        builder.Entity<Medication>().HasData(new Medication
-        {
-            ID = 1,
-            Name = "Amoxicillin"
-        });
-
-        builder.Entity<Medication>().HasData(new Medication
-        {
-            ID = 2,
-            Name = "Prednisolone"
-        });
+        builder.Entity<Medication>().HasData(
+           new Medication
+           {
+               ID = 1,
+               Name = "Amoxicillin",
+               DosageUnit = "mg",
+               SideEffect = "Nausea, diarrhea, vomiting (less common)",
+               ActiveIngredient = "Amoxicillin Trihydrate",
+           },
+           new Medication
+           {
+               ID = 2,
+               Name = "Prednisolone",
+               DosageUnit = "mg",
+               SideEffect = "Increased appetite, weight gain, mood swings (less common)",
+               ActiveIngredient = "Prednisolone"
+           }
+         );
     }
 }

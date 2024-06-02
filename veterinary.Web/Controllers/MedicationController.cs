@@ -41,5 +41,38 @@ namespace Veterinary.Web.Controllers
 
             return View(medication);
         }
+
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        [ActionName("Edit")]
+        public IActionResult EditGet(int id)
+        {
+            var medication = veterinaryManagerDbContext.Medication.First(m => m.ID == id);
+
+            return View(medication);
+        }
+
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        [HttpPost]
+        [ActionName("Edit")]
+        public async Task<IActionResult> EditPost(int id)
+        {
+            var medication = veterinaryManagerDbContext.Medication.First(m => m.ID == id);
+
+            bool isOk = await TryUpdateModelAsync(medication);
+
+            var validationErrors = ModelState.Values.Where(E => E.Errors.Count > 0)
+                .SelectMany(E => E.Errors)
+                .Select(E => E.ErrorMessage)
+                .ToList();
+
+
+            if (isOk)
+            {
+                veterinaryManagerDbContext.SaveChanges();
+                return RedirectToAction(nameof(Index));
+            }
+
+            return View();
+        }
     }
 }

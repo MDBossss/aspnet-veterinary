@@ -12,5 +12,11 @@ public class Medication
     [MaxLength(50)]
     public string Name { get; set; }
 
+    public string? DosageUnit { get; set; }
+
+    public string? SideEffect { get; set; }
+
+    public string? ActiveIngredient { get; set; }
+
     public ICollection<Prescription>? Prescriptions { get; set; }
 }

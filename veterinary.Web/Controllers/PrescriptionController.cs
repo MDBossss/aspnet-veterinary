@@ -55,7 +55,6 @@ namespace Veterinary.Web.Controllers
             return View(prescription);
         }
 
-
         [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
         public IActionResult Delete(int id)
         {

@@ -19,6 +19,10 @@
                 <tr>
                     <th>ID</th>
                     <th>Name</th>
+                    <th>Dosage unit</th>
+                    <th>Side effect</th>
+                    <th>Active ingredient</th>
+                    <th></th>
                 </tr>
             </thead>
 
@@ -28,6 +32,16 @@
                     <tr>
                         <td>@m.ID</td>
                         <td>@m.Name</td>
+                        <td>@m.DosageUnit</td>
+                        <td>@m.SideEffect</td>
+                        <td>@m.ActiveIngredient</td>
+                        <th>
+                            <a asp-controller="Medication" asp-action="Edit" asp-route-id="@m.ID">
+                                <button class="btn btn-secondary btn-sm">
+                                    <img src="/images/pencil.svg" class="fill-white" />
+                                </button>
+                            </a>
+                        </th>
                     </tr>
                 }
             </tbody>
