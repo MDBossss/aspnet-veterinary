@@ -1,0 +1,37 @@
+﻿@using Veterinary.Model
+@model List<Medication>
+
+@{
+    ViewData["Title"] = "Available medication";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+
+<div class="">
+    <form class="d-flex gap-1 align-items-end" method="post" asp-controller="Medication" asp-action="Create">
+        <partial name="_Create" model="new Medication()"/>
+    </form>
+
+    <div class="card p-5 mt-2">
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach(var m in Model)
+                {
+                    <tr>
+                        <td>@m.ID</td>
+                        <td>@m.Name</td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>

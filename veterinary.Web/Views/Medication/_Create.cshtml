@@ -1,0 +1,10 @@
+﻿@using Veterinary.Model
+@model Medication
+
+<div class="form-group flex-grow-1">
+    <label for="@Html.NameFor(m => m.Name)">Name</label>
+    @Html.TextBoxFor(m => m.Name, new { @class = "form-control" })
+    <span asp-validation-for="Name" class="text-danger"></span>
+</div>
+
+<button type="submit" class="btn btn-primary" style="max-height: 38px">Create</button>
