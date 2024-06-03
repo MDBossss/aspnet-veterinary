@@ -80,5 +80,22 @@ namespace Veterinary.Web.Controllers
 
             return View();
         }
+
+
+        [Authorize(Roles = RoleConstants.DoctorOrApprentice)]
+        public IActionResult Delete(int id)
+        {
+            var existingOwner = veterinaryManagerDbContext.Owners.First(o => o.ID == id);
+
+            if(existingOwner == null)
+            {
+                return NotFound();
+            }
+
+            veterinaryManagerDbContext.Owners.Remove(existingOwner);
+            veterinaryManagerDbContext.SaveChanges();
+
+            return RedirectToAction("Index");
+        }
     }
 }

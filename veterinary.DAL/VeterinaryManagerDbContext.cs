@@ -64,7 +64,7 @@ public class VeterinaryManagerDbContext : IdentityDbContext<AppUser, IdentityRol
             ID = 1,
             Name = "Buddy",
             Breed = "Labrador",
-            BirthDate = new DateTime(),
+            BirthDate = DateTime.Now,
             Weight = 32,
             OwnerID = 1
         });
